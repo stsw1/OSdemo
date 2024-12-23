@@ -1,0 +1,51 @@
+server:
+ port: 8081
+spring:
+  datasource:
+    #配置驱动类
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db3?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  #配置自定义静态资源的位置
+  web:
+    resources:
+      #注意：配置数组数据时候，用短中线，短中线后面要空格
+      static-locations:
+        - classpath:/META-INF/resources/
+        - classpath:/resources/
+        - classpath:/static/
+        - classpath:/public/
+        - file:D:/temp
+    #type: com.alibaba.druid.pool.DruidDataSource
+  servlet:
+    multipart:
+      #上传文件的大小配置
+      max-file-size: 1024MB
+      #请求数据大小配置
+      max-request-size: 2048MB
+#上传文件的基本路径
+file:
+  basePath: D:/temp
+#token的过期时间（单位是毫秒）
+token:
+  expiration: 36000000
+logging:
+  file:
+    name: admin.log
+  level:
+    com.tjetc: debug
+mybatis-plus:
+  #配置映射文件位置
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    #mybatis输出执行sql、参数和结果集日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 将 Java 实体类属性的驼峰命名规则转换为数据库字段的下划线命名规则
+    map-underscore-to-camel-case: true
+    # 查询结果中包含空值的列，在映射的时候，不会映射这个字段
+    call-setters-on-nulls: true
+  #配置别名
+  type-aliases-package: com.tjetc.entity
+
+
